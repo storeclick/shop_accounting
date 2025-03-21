@@ -9,6 +9,9 @@ if (!defined('BASE_PATH')) {
     die('دسترسی غیرمجاز');
 }
 
+// لود کردن توابع دیتابیس
+require_once INCLUDES_PATH . '/database.php';
+
 /**
  * بررسی اعتبار نام کاربری و رمز عبور
  */

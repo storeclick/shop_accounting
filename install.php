@@ -278,7 +278,7 @@ session_name(SESSION_NAME);
 session_start();
 
 // لود کردن توابع
-require_once INCLUDES_PATH . '/functions.php';}
+require_once INCLUDES_PATH . '/functions.php';
 ";
             
             // ایجاد پوشه‌های مورد نیاز
@@ -557,7 +557,7 @@ require_once INCLUDES_PATH . '/functions.php';}
 
 <div class="install-box">
     <div class="logo">
-        <h1>نصب سیستم حسابداری</h1>
+        <h1>نصب سیستم حسابداری فروشگاه</h1>
     </div>
     
     <div class="steps">

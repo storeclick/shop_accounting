@@ -12,6 +12,7 @@ if (!defined('BASE_PATH')) {
 
 // لود کردن تنظیمات
 require_once 'config/config.php';
+require_once INCLUDES_PATH . '/auth.php'; // اضافه کردن این خط برای بارگذاری auth.php
 
 // ریدایرکت به داشبورد اگر لاگین است
 if (is_logged_in()) {
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = 'لطفاً نام کاربری و رمز عبور را وارد کنید';
     } else {
         // تلاش برای ورود
-        $result = auth_login($username, $password);
+        $result = auth_login($username, $password, $remember);
         
         if ($result['success']) {
             // ریدایرکت به صفحه اصلی

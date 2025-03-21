@@ -1,7 +1,7 @@
 <?php
 /**
  * تنظیمات سیستم حسابداری فروشگاه
- * تاریخ ایجاد: 2025-03-21 14:52:23
+ * تاریخ ایجاد: 2025-03-21 15:05:23
  */
 
 // بررسی تعریف ثابت‌ها
@@ -121,5 +121,4 @@ session_name(SESSION_NAME);
 session_start();
 
 // لود کردن توابع
-require_once INCLUDES_PATH . '/functions.php';  
-}
+require_once INCLUDES_PATH . '/functions.php';
