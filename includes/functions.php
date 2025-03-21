@@ -315,3 +315,10 @@ function check_update() {
         error_log('خطا در بررسی آپدیت: ' . $e->getMessage());
     }
 }
+
+/**
+ * تمیز کردن ورودی‌ها
+ */
+function sanitize($data) {
+    return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
+}

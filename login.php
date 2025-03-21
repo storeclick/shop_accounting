@@ -6,7 +6,9 @@
  */
 
 // تعریف مسیر اصلی
-define('BASE_PATH', __DIR__);
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', __DIR__);
+}
 
 // لود کردن تنظیمات
 require_once 'config/config.php';
@@ -28,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = 'لطفاً نام کاربری و رمز عبور را وارد کنید';
     } else {
         // تلاش برای ورود
-        $result = auth_login($username, $password, $remember);
+        $result = auth_login($username, $password);
         
         if ($result['success']) {
             // ریدایرکت به صفحه اصلی

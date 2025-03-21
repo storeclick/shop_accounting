@@ -1,116 +1,125 @@
 <?php
 /**
- * تنظیمات برنامه حسابداری فروشگاه
- * تاریخ ایجاد: ۱۴۰۳/۰۱/۰۲
+ * تنظیمات سیستم حسابداری فروشگاه
+ * تاریخ ایجاد: 2025-03-21 14:52:23
  */
 
-// بررسی تعریف مسیر اصلی
+// بررسی تعریف ثابت‌ها
 if (!defined('BASE_PATH')) {
-    define('BASE_PATH', dirname(__DIR__));
+    define('BASE_PATH', dirname(__FILE__));
+}
+if (!defined('BASE_URL')) {
+    define('BASE_URL', 'http://localhost/shop_accounting');
 }
 
-// نمایش خطاها در محیط توسعه
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // تنظیمات دیتابیس
-define('DB_HOST', 'localhost');     // آدرس سرور دیتابیس
-define('DB_NAME', 'shop_accounting'); // نام دیتابیس
-define('DB_USER', 'root');          // نام کاربری دیتابیس
-define('DB_PASS', '');              // رمز عبور دیتابیس
-define('DB_CHARSET', 'utf8mb4');    // کاراکترست دیتابیس
+if (!defined('DB_HOST')) {
+    define('DB_HOST', 'localhost');
+}
+if (!defined('DB_NAME')) {
+    define('DB_NAME', 'shop_accounting');
+}
+if (!defined('DB_USER')) {
+    define('DB_USER', 'root');
+}
+if (!defined('DB_PASS')) {
+    define('DB_PASS', '');
+}
+
+// تنظیمات سایت
+if (!defined('SITE_TITLE')) {
+    define('SITE_TITLE', 'سیستم حسابداری فروشگاه');
+}
+if (!defined('APP_VERSION')) {
+    define('APP_VERSION', '1.0.0');
+}
 
 // تنظیمات مسیرها
-define('BASE_URL', 'http://localhost/shop_accounting'); // آدرس اصلی برنامه
-define('ASSETS_URL', BASE_URL . '/assets');           // مسیر فایل‌های استاتیک
-define('UPLOADS_URL', BASE_URL . '/uploads');         // مسیر آپلودها - لینک
-define('UPLOADS_PATH', BASE_PATH . '/uploads');       // مسیر آپلودها - فیزیکی
+if (!defined('MODULES_PATH')) {
+    define('MODULES_PATH', BASE_PATH . '/modules');
+}
+if (!defined('INCLUDES_PATH')) {
+    define('INCLUDES_PATH', BASE_PATH . '/includes');
+}
+if (!defined('UPLOADS_PATH')) {
+    define('UPLOADS_PATH', BASE_PATH . '/uploads');
+}
+if (!defined('ASSETS_PATH')) {
+    define('ASSETS_PATH', BASE_PATH . '/assets');
+}
+if (!defined('ASSETS_URL')) {
+    define('ASSETS_URL', BASE_URL . '/assets');
+}
+if (!defined('UPLOADS_URL')) {
+    define('UPLOADS_URL', BASE_URL . '/uploads');
+}
 
-// تنظیمات برنامه
-define('SITE_TITLE', 'حسابداری فروشگاه');          // عنوان برنامه
-define('SITE_DESCRIPTION', 'برنامه حسابداری و مدیریت فروشگاه'); // توضیحات
-define('SITE_VERSION', '1.0.0');                     // نسخه برنامه
-define('SITE_AUTHOR', 'cofeclick1');                 // نویسنده
-define('SITE_EMAIL', 'info@example.com');            // ایمیل پشتیبانی
+// تنظیمات زمانی
+date_default_timezone_set('Asia/Tehran');
 
 // تنظیمات امنیتی
-define('CSRF_TOKEN_NAME', 'csrf_token');             // نام توکن CSRF
-define('SESSION_NAME', 'shop_accounting');           // نام سشن
-define('SESSION_LIFETIME', 7200);                    // مدت زمان سشن (2 ساعت)
-define('REMEMBER_COOKIE_NAME', 'remember_token');    // نام کوکی مرا به خاطر بسپار
-define('REMEMBER_COOKIE_LIFETIME', 2592000);         // مدت زمان کوکی (30 روز)
-define('PASSWORD_RESET_LIFETIME', 3600);             // مدت زمان بازیابی رمز (1 ساعت)
+if (!defined('CSRF_TOKEN_NAME')) {
+    define('CSRF_TOKEN_NAME', 'csrf_token');
+}
+if (!defined('SESSION_NAME')) {
+    define('SESSION_NAME', 'shop_accounting');
+}
+if (!defined('SESSION_LIFETIME')) {
+    define('SESSION_LIFETIME', 7200);
+}
+if (!defined('REMEMBER_COOKIE_NAME')) {
+    define('REMEMBER_COOKIE_NAME', 'remember_token');
+}
+if (!defined('REMEMBER_COOKIE_LIFETIME')) {
+    define('REMEMBER_COOKIE_LIFETIME', 2592000);
+}
 
 // تنظیمات آپلود
-define('MAX_UPLOAD_SIZE', 5242880);                  // حداکثر حجم آپلود (5MB)
-define('ALLOWED_IMAGE_TYPES', ['jpg', 'jpeg', 'png', 'gif', 'webp']); // پسوندهای مجاز تصاویر
-define('MAX_IMAGE_WIDTH', 2048);                     // حداکثر عرض تصویر
-define('MAX_IMAGE_HEIGHT', 2048);                    // حداکثر ارتفاع تصویر
-define('THUMBNAIL_WIDTH', 150);                      // عرض تصویر بندانگشتی
-define('THUMBNAIL_HEIGHT', 150);                     // ارتفاع تصویر بندانگشتی
+if (!defined('MAX_UPLOAD_SIZE')) {
+    define('MAX_UPLOAD_SIZE', 5242880);
+}
+if (!defined('ALLOWED_IMAGE_TYPES')) {
+    define('ALLOWED_IMAGE_TYPES', ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+}
 
-// تنظیمات صفحه‌بندی
-define('ITEMS_PER_PAGE', 20);                        // تعداد آیتم در هر صفحه
-define('PAGE_LINKS', 5);                             // تعداد لینک‌های صفحه‌بندی
-
-// تنظیمات منطقه زمانی و زبان
-date_default_timezone_set('Asia/Tehran');            // منطقه زمانی
-setlocale(LC_ALL, 'fa_IR.UTF-8', 'fa_IR', 'fa');    // تنظیمات محلی
-
-// تنظیمات فاکتور
-define('INVOICE_PREFIX', 'INV-');                    // پیشوند شماره فاکتور
-define('INVOICE_START', '1000');                     // شماره شروع فاکتور
-define('VAT_RATE', 9);                              // درصد مالیات بر ارزش افزوده
+// تنظیمات فروش
+if (!defined('VAT_RATE')) {
+    define('VAT_RATE', 9);
+}
+if (!defined('INVOICE_PREFIX')) {
+    define('INVOICE_PREFIX', 'INV-');
+}
+if (!defined('INVOICE_START_NUMBER')) {
+    define('INVOICE_START_NUMBER', 1000);
+}
 
 // تنظیمات انبار
-define('LOW_STOCK_WARNING', 5);                      // هشدار موجودی کم
-define('STOCK_WARNING_EMAIL', true);                 // ارسال ایمیل هشدار موجودی
-define('NEGATIVE_STOCK_ALLOWED', false);             // اجازه موجودی منفی
+if (!defined('LOW_STOCK_WARNING')) {
+    define('LOW_STOCK_WARNING', 5);
+}
+if (!defined('NEGATIVE_STOCK_ALLOWED')) {
+    define('NEGATIVE_STOCK_ALLOWED', false);
+}
 
 // تنظیمات بروزرسانی
-define('UPDATE_CHECK_INTERVAL', (int) '86400');      // فاصله بررسی بروزرسانی (1 روز)
-define('UPDATE_REPOSITORY', 'cofeclick1/shop_accounting'); // مخزن گیت‌هاب
-define('UPDATE_BRANCH', 'main');                     // شاخه بروزرسانی
+if (!defined('UPDATE_CHECK_INTERVAL')) {
+    define('UPDATE_CHECK_INTERVAL', 86400);
+}
+if (!defined('UPDATE_REPOSITORY')) {
+    define('UPDATE_REPOSITORY', 'cofeclick1/shop_accounting');
+}
+if (!defined('UPDATE_BRANCH')) {
+    define('UPDATE_BRANCH', 'main');
 
-// تنظیمات گزارش‌گیری
-define('REPORT_TIMEZONE', 'Asia/Tehran');            // منطقه زمانی گزارش‌ها
-define('REPORT_DATE_FORMAT', 'Y/m/d');              // فرمت تاریخ در گزارش‌ها
-define('REPORT_TIME_FORMAT', 'H:i:s');              // فرمت ساعت در گزارش‌ها
+// تنظیمات برنامه
+if (!defined('SITE_VERSION')) {
+    define('SITE_VERSION', '1.0.0');
+}
 
-// تنظیمات پشتیبان‌گیری
-define('BACKUP_PATH', BASE_PATH . '/backups');       // مسیر پشتیبان‌گیری
-define('BACKUP_FILENAME', 'backup_%s.sql');          // فرمت نام فایل پشتیبان
-define('BACKUP_COMPRESS', true);                     // فشرده‌سازی فایل پشتیبان
-define('BACKUP_LIFETIME', (int) '604800');           // مدت نگهداری پشتیبان (7 روز)
-
-// شروع جلسه
+// شروع سشن
 session_name(SESSION_NAME);
 session_start();
 
 // لود کردن توابع
-$required_files = [
-    'includes/functions.php',    // توابع عمومی
-    'includes/database.php',     // توابع دیتابیس
-    'includes/auth.php',         // توابع احراز هویت
-];
-
-foreach ($required_files as $file) {
-    $path = BASE_PATH . '/' . $file;
-    if (file_exists($path)) {
-        require_once $path;
-    } else {
-        // لاگ خطا
-        error_log("خطا: فایل {$file} یافت نشد!");
-    }
+require_once INCLUDES_PATH . '/functions.php';  
 }
-
-// بررسی آپدیت جدید (فقط برای کاربران لاگین شده)
-if (isset($_SESSION['user_id']) && 
-    (!isset($_SESSION['update_checked']) || 
-    (time() - $_SESSION['update_checked']) > (int) UPDATE_CHECK_INTERVAL)) {
-    check_update();
-}
-
-// تنظیم متغیرهای عمومی
-$GLOBALS['messages'] = [];           // پیام‌ها
-$GLOBALS['start_time'] = microtime(true); // زمان شروع اجرا
