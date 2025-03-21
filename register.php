@@ -1,15 +1,20 @@
 <?php
 /**
- * صفحه ثبت‌نام در سیستم
+ * صفحه ثبت‌نام در سیستم حسابداری فروشگاه
  * تاریخ ایجاد: ۱۴۰۳/۰۱/۰۱
  */
 
+// تنظیم مسیر اصلی
+define('BASE_PATH', dirname(__FILE__));
+
+// لود کردن تنظیمات و توابع مورد نیاز
 require_once 'config/config.php';
+require_once 'includes/functions.php';
+require_once 'includes/database.php';
 
 // اگر کاربر قبلاً لاگین کرده، به داشبورد منتقل شود
-if (isset($_SESSION['user_id'])) {
-    header('Location: dashboard.php');
-    exit;
+if (is_logged_in()) {
+    redirect('dashboard.php');
 }
 
 $error = '';
@@ -17,145 +22,85 @@ $success = '';
 
 // پردازش فرم ثبت‌نام
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = sanitize($_POST['username']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $name = sanitize($_POST['name']);
-    $mobile = sanitize($_POST['mobile']);
-    
-    // بررسی خالی نبودن فیلدها
-    if (empty($username) || empty($password) || empty($confirm_password) || empty($name) || empty($mobile)) {
-        $error = 'لطفاً همه فیلدها را پر کنید';
-    } 
-    // بررسی یکسان بودن رمز عبور
-    elseif ($password !== $confirm_password) {
-        $error = 'رمز عبور و تکرار آن یکسان نیستند';
+    // بررسی توکن CSRF
+    if (!CSRF::validate()) {
+        die('توکن CSRF نامعتبر است');
     }
-    // بررسی طول رمز عبور
-    elseif (strlen($password) < 6) {
-        $error = 'رمز عبور باید حداقل ۶ کاراکتر باشد';
-    }
-    // بررسی فرمت موبایل
-    elseif (!preg_match('/^09[0-9]{9}$/', $mobile)) {
-        $error = 'شماره موبایل معتبر نیست';
-    }
-    else {
-        try {
-            // بررسی تکراری نبودن نام کاربری
-            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
-            $stmt->execute([$username]);
-            if ($stmt->fetchColumn() > 0) {
-                $error = 'این نام کاربری قبلاً ثبت شده است';
-            } else {
-                // ثبت کاربر جدید
-                $stmt = $pdo->prepare("
-                    INSERT INTO users (username, password, name, mobile, role, status, created_at)
-                    VALUES (?, ?, ?, ?, 'user', 1, CURRENT_TIMESTAMP)
-                ");
+
+    // دریافت و پاکسازی داده‌های ورودی
+    $data = [
+        'username' => sanitize($_POST['username']),
+        'password' => $_POST['password'],
+        'confirm_password' => $_POST['confirm_password'],
+        'name' => sanitize($_POST['name']),
+        'mobile' => sanitize($_POST['mobile'])
+    ];
+
+    // اعتبارسنجی داده‌ها
+    $validator = new Validator($data);
+    $validator->rules([
+        'username' => 'required|min:3|max:50',
+        'password' => 'required|min:6',
+        'confirm_password' => 'required',
+        'name' => 'required|min:3|max:100',
+        'mobile' => 'required|mobile'
+    ]);
+
+    if ($validator->validate()) {
+        // بررسی یکسان بودن رمز عبور
+        if ($data['password'] !== $data['confirm_password']) {
+            $error = 'رمز عبور و تکرار آن یکسان نیستند';
+        } else {
+            try {
+                $pdo = db_connect();
                 
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                // بررسی تکراری نبودن نام کاربری
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+                $stmt->execute([$data['username']]);
                 
-                if ($stmt->execute([$username, $hashed_password, $name, $mobile])) {
-                    $success = 'ثبت‌نام با موفقیت انجام شد. اکنون می‌توانید وارد شوید';
-                    // ریدایرکت به صفحه ورود بعد از ۳ ثانیه
-                    header("refresh:3;url=login.php");
+                if ($stmt->fetchColumn() > 0) {
+                    $error = 'این نام کاربری قبلاً ثبت شده است';
                 } else {
-                    $error = 'خطا در ثبت اطلاعات';
+                    // ثبت کاربر جدید
+                    $stmt = $pdo->prepare("
+                        INSERT INTO users (username, password, name, mobile, role, status, created_at)
+                        VALUES (?, ?, ?, ?, 'user', 1, CURRENT_TIMESTAMP)
+                    ");
+                    
+                    $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
+                    
+                    if ($stmt->execute([
+                        $data['username'],
+                        $hashed_password,
+                        $data['name'],
+                        $data['mobile']
+                    ])) {
+                        $success = 'ثبت‌نام با موفقیت انجام شد. اکنون می‌توانید وارد شوید';
+                        // ریدایرکت به صفحه ورود بعد از ۳ ثانیه
+                        header("refresh:3;url=login.php");
+                    } else {
+                        $error = 'خطا در ثبت اطلاعات';
+                    }
                 }
+            } catch(PDOException $e) {
+                error_log($e->getMessage());
+                $error = 'خطا در ثبت‌نام';
             }
-        } catch(PDOException $e) {
-            error_log($e->getMessage());
-            $error = 'خطا در ثبت‌نام';
         }
+    } else {
+        $errors = $validator->errors();
+        $error = reset($errors)[0]; // نمایش اولین خطا
     }
 }
+
+// قالب صفحه
+require_once 'templates/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ثبت‌نام در سیستم حسابداری</title>
-    
-    <!-- فونت‌ها -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
-    
-    <!-- استایل‌ها -->
-    <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/style.css">
-    
-    <style>
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .register-box {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            max-width: 500px;
-            width: 100%;
-            padding: 30px;
-        }
-        
-        .register-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .register-logo img {
-            width: 100px;
-            height: auto;
-        }
-        
-        .form-control {
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: #764ba2;
-            box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
-        }
-        
-        .btn-primary {
-            background: #764ba2;
-            border-color: #764ba2;
-            border-radius: 8px;
-            padding: 12px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary:hover {
-            background: #667eea;
-            border-color: #667eea;
-            transform: translateY(-1px);
-        }
-        
-        .alert {
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
 
 <div class="register-box">
     <div class="register-logo">
-        <img src="<?= ASSETS_URL ?>/images/logo.png" alt="لوگو">
-        <h4 class="mt-3">ثبت‌نام در سیستم حسابداری</h4>
+        <img src="<?= ASSETS_URL ?>/images/logo.png" alt="<?= SITE_TITLE ?>">
+        <h4 class="mt-3">ثبت‌نام در <?= SITE_TITLE ?></h4>
     </div>
     
     <?php if ($error): ?>
@@ -172,7 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     <?php endif; ?>
     
-    <form method="post" autocomplete="off">
+    <form method="post" autocomplete="off" onsubmit="return validateForm(this)">
+        <!-- توکن CSRF -->
+        <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= CSRF::generate() ?>">
+        
         <div class="row">
             <div class="col-md-6 mb-4">
                 <label class="form-label">نام کاربری</label>
@@ -271,31 +219,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 
-<!-- اسکریپت‌ها -->
-<script src="<?= ASSETS_URL ?>/js/bootstrap.bundle.min.js"></script>
-<script>
-function togglePassword(button) {
-    const input = button.parentElement.querySelector('input');
-    const icon = button.querySelector('i');
-    
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.classList.replace('bi-eye', 'bi-eye-slash');
-    } else {
-        input.type = 'password';
-        icon.classList.replace('bi-eye-slash', 'bi-eye');
-    }
-}
-
-// حذف پیام‌های خطا بعد از 5 ثانیه
-document.querySelectorAll('.alert').forEach(alert => {
-    setTimeout(() => {
-        alert.style.transition = 'opacity 0.5s';
-        alert.style.opacity = 0;
-        setTimeout(() => alert.remove(), 500);
-    }, 5000);
-});
-</script>
-
-</body>
-</html>
+<?php require_once 'templates/footer.php'; ?>

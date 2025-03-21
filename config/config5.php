@@ -6,7 +6,7 @@
 
 // بررسی تعریف ثابت‌ها
 if (!defined('BASE_PATH')) {
-    define('BASE_PATH', dirname(dirname(__FILE__))); // تغییر به یک سطح بالاتر
+    define('BASE_PATH', dirname(__FILE__));
 }
 if (!defined('BASE_URL')) {
     define('BASE_URL', 'http://localhost/shop_accounting');
@@ -25,9 +25,6 @@ if (!defined('DB_USER')) {
 if (!defined('DB_PASS')) {
     define('DB_PASS', '');
 }
-if (!defined('DB_CHARSET')) {  // اضافه کردن DB_CHARSET
-    define('DB_CHARSET', 'utf8mb4');
-}
 
 // تنظیمات سایت
 if (!defined('SITE_TITLE')) {
@@ -42,7 +39,7 @@ if (!defined('MODULES_PATH')) {
     define('MODULES_PATH', BASE_PATH . '/modules');
 }
 if (!defined('INCLUDES_PATH')) {
-    define('INCLUDES_PATH', BASE_PATH . '/includes'); // تغییر مسیر به پوشه اصلی
+    define('INCLUDES_PATH', BASE_PATH . '/includes');
 }
 if (!defined('UPLOADS_PATH')) {
     define('UPLOADS_PATH', BASE_PATH . '/uploads');
@@ -113,7 +110,6 @@ if (!defined('UPDATE_REPOSITORY')) {
 }
 if (!defined('UPDATE_BRANCH')) {
     define('UPDATE_BRANCH', 'main');
-}
 
 // تنظیمات برنامه
 if (!defined('SITE_VERSION')) {
@@ -125,9 +121,5 @@ session_name(SESSION_NAME);
 session_start();
 
 // لود کردن توابع
-$functions_file = INCLUDES_PATH . '/functions.php';
-if (file_exists($functions_file)) {
-    require_once $functions_file;
-} else {
-    die('خطا: فایل functions.php یافت نشد. مسیر: ' . $functions_file);
+require_once INCLUDES_PATH . '/functions.php';
 }
