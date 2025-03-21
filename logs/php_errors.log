@@ -1,0 +1,20 @@
+[21-Mar-2025 00:31:57 Asia/Tehran] خطا در بررسی بروزرسانی: عدم دسترسی به سرور
+[21-Mar-2025 00:31:57 Asia/Tehran] PHP Fatal error:  Uncaught Error: Call to undefined function get_dashboard_stats() in C:\xampp\htdocs\shop_accounting\dashboard.php:10
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\shop_accounting\dashboard.php on line 10
+[21-Mar-2025 00:35:34 Asia/Tehran] خطا در بررسی بروزرسانی: عدم دسترسی به سرور
+[21-Mar-2025 00:35:34 Asia/Tehran] خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+[21-Mar-2025 00:35:34 Asia/Tehran] خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+[21-Mar-2025 00:35:34 Asia/Tehran] خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+[21-Mar-2025 00:35:34 Asia/Tehran] خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+[21-Mar-2025 00:35:34 Asia/Tehran] PHP Fatal error:  Uncaught Error: Call to undefined function jdate() in C:\xampp\htdocs\shop_accounting\dashboard.php:62
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\shop_accounting\dashboard.php on line 62
+[21-Mar-2025 00:38:17 Asia/Tehran] PHP Fatal error:  Uncaught Error: Undefined constant "CACHE_ENABLED" in C:\xampp\htdocs\shop_accounting\includes\functions.php:16
+Stack trace:
+#0 C:\xampp\htdocs\shop_accounting\includes\functions.php(60): db_query('\r\n    SELECT \r\n...', Array, true)
+#1 C:\xampp\htdocs\shop_accounting\dashboard.php(14): db_get_row('\r\n    SELECT \r\n...')
+#2 {main}
+  thrown in C:\xampp\htdocs\shop_accounting\includes\functions.php on line 16

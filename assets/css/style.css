@@ -1,0 +1,1027 @@
+/**
+ * استایل‌های عمومی برنامه
+ * تاریخ ایجاد: ۱۴۰۳/۰۱/۰۱
+ */
+
+/* تعریف فونت ایران‌سنس */
+@font-face {
+    font-family: IRANSans;
+    src: url('../fonts/iran-sans/IRANSansWeb.woff2') format('woff2'),
+         url('../fonts/iran-sans/IRANSansWeb.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* فونت و رنگ‌های پایه */
+:root {
+    --bs-font-sans-serif: 'IRANSans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
+}
+
+body {
+    font-family: var(--bs-font-sans-serif);
+    background-color: #f8f9fa;
+}
+
+/* لودینگ */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* کارت‌ها */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* جداول */
+.table > :not(caption) > * > * {
+    padding: 1rem;
+}
+
+.table .actions {
+    width: 120px;
+    text-align: left;
+}
+
+/* دکمه‌ها */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* فرم‌ها */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+}
+
+.form-floating > label {
+    height: auto;
+    padding-top: 0.5rem;
+    transform-origin: right top;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+/* پیام‌ها */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alert .btn-close {
+    margin-right: auto;
+    margin-left: -0.5rem;
+}
+
+/* نوار پیمایش */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* منوی اصلی */
+.navbar {
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand img {
+    filter: brightness(0) invert(1);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-menu {
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* صفحه داشبورد */
+.dashboard-card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.dashboard-card .card-body {
+    padding: 2rem;
+}
+
+.dashboard-card .icon {
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+/* جدول محصولات */
+.product-image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+.product-stock {
+    width: 120px;
+}
+
+.stock-badge {
+    min-width: 80px;
+}
+
+/* صفحه فاکتور */
+.invoice-items {
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.invoice-total {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* فرم جستجو */
+.search-form {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* پیام‌های خطا */
+.invalid-feedback {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* چاپ فاکتور */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: block !important;
+    }
+    
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* انیمیشن‌ها */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .navbar-brand img {
+        height: 24px;
+    }
+    
+    .dashboard-card .card-body {
+        padding: 1rem;
+    }
+    
+    .dashboard-card .icon {
+        font-size: 2rem;
+    }
+    
+    .table-responsive {
+        margin: 0 -1rem;
+        width: calc(100% + 2rem);
+    }
+    
+    .invoice-items {
+        max-height: 400px;
+    }
+}
+/* منوی موبایل */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    z-index: 1050;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1049;
+    display: none;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+}
+
+.mobile-menu-header {
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.mobile-menu-body {
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+
+.mobile-menu .nav-link {
+    color: #333;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.mobile-menu .nav-link:hover {
+    background: #f8f9fa;
+}
+
+.mobile-menu .nav-link i {
+    width: 20px;
+    text-align: center;
+    margin-left: 8px;
+}
+
+.mobile-menu .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: #f8f9fa;
+}
+
+.mobile-menu .dropdown-item {
+    padding: 12px 15px 12px 30px;
+    border-bottom: 1px solid #eee;
+}
+
+/* اصلاح منوی دسکتاپ */
+.navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.navbar .nav-item:hover > .dropdown-menu {
+    display: block;
+}
+
+/* فونت فارسی */
+@font-face {
+    font-family: IRANSans;
+    src: url('../fonts/iran-sans/IRANSansWeb.woff2') format('woff2');
+    font-display: swap;
+}
+
+body {
+    font-family: IRANSans, Tahoma, sans-serif;
+}
+
+/* اعداد فارسی */
+.persian-number {
+    direction: ltr;
+}
+
+/* دکمه‌های عملیات */
+.btn-group-action .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* جداول */
+.table > :not(caption) > * > * {
+    padding: 0.75rem;
+}
+
+.table .badge {
+    font-size: 0.875em;
+}
+
+/* کارت‌ها */
+.card {
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* فرم‌ها */
+.form-label {
+    font-weight: 500;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+/* دکمه منوی موبایل */
+.mobile-menu-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1048;
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+/**
+ * استایل‌های اختصاصی برنامه حسابداری فروشگاه
+ * تاریخ ایجاد: ۱۴۰۳/۰۱/۰۲
+ */
+
+/* استایل‌های عمومی */
+body {
+    background-color: #f8f9fa;
+}
+
+/* استایل آپلود تصویر */
+.product-image-upload {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-image-upload:hover {
+    border-color: #0d6efd;
+}
+
+.product-image-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-image-upload .upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product-image-upload:hover .upload-overlay {
+    opacity: 1;
+}
+
+.product-image-upload .upload-overlay i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* گالری تصاویر */
+.product-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item .gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item .gallery-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gallery-item .gallery-actions button {
+    background: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 1rem;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item .gallery-actions button:hover {
+    background: #0d6efd;
+    color: #fff;
+}
+
+/* مودال نمایش تصویر */
+.image-preview-modal .modal-body {
+    padding: 0;
+    text-align: center;
+    background: #000;
+}
+
+.image-preview-modal img {
+    max-width: 100%;
+    max-height: 80vh;
+}
+/**
+ * استایل‌های اختصاصی برنامه حسابداری فروشگاه
+ * تاریخ ایجاد: ۱۴۰۳/۰۱/۰۲
+ */
+
+/* تنظیمات کلی */
+@font-face {
+    font-family: IRANSans;
+    src: url('../fonts/iran-sans/IRANSansWeb.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+}
+
+body {
+    font-family: IRANSans, sans-serif;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+/* هدر و منو */
+.navbar {
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    margin-left: 0.5rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.nav-link i {
+    margin-left: 0.5rem;
+}
+
+.dropdown-item i {
+    margin-left: 0.5rem;
+    width: 1rem;
+    text-align: center;
+}
+
+/* منوی موبایل */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    z-index: 1050;
+    transition: right 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.mobile-menu-body {
+    padding: 1rem;
+}
+
+.mobile-menu .nav-link {
+    padding: 0.75rem 1rem;
+    color: #333;
+    border-radius: 0.25rem;
+}
+
+.mobile-menu .nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+.mobile-menu .nav-link.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.mobile-menu .dropdown-item {
+    padding: 0.5rem 2rem;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1030;
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* کارت‌ها */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.card-title i {
+    margin-left: 0.5rem;
+}
+
+/* فرم‌ها */
+.form-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control,
+.form-select {
+    border-color: #dee2e6;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* آپلود تصویر محصول */
+.product-image-upload {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #dee2e6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-image-upload:hover {
+    border-color: var(--primary-color);
+}
+
+.product-image-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-image-upload .upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product-image-upload:hover .upload-overlay {
+    opacity: 1;
+}
+
+.product-image-upload .upload-overlay i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* گالری تصاویر */
+.product-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    cursor: move;
+}
+
+.gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item .gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item .gallery-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gallery-item .gallery-actions button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.gallery-item .gallery-actions button:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.gallery-item:last-child {
+    border: 2px dashed #dee2e6;
+    cursor: pointer;
+}
+
+.gallery-item:last-child:hover {
+    border-color: var(--primary-color);
+}
+
+.gallery-item:last-child .upload-overlay {
+    opacity: 0.8;
+}
+
+.gallery-item:last-child:hover .upload-overlay {
+    opacity: 1;
+}
+
+/* مودال نمایش تصویر */
+.image-preview-modal .modal-body {
+    padding: 0;
+    text-align: center;
+    background: #000;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.image-preview-modal img {
+    max-width: 100%;
+    max-height: 80vh;
+    margin: 0 auto;
+}
+
+/* دکمه‌ها */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.btn i {
+    font-size: 1.1em;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+/* جدول‌ها */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    font-weight: 500;
+    background-color: #f8f9fa;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* نوار اسکرول */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+/* اعداد فارسی */
+.persian-number {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* پیام‌های هشدار */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.alert i {
+    font-size: 1.25rem;
+}
+
+/* ریسپانسیو */
+@media (max-width: 767.98px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .table-responsive {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+        width: calc(100% + 2rem);
+    }
+}
+
+/* دیباگ */
+.debug-info {
+    font-size: 0.875rem;
+    color: #6c757d;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.debug-info pre {
+    margin: 0;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+}

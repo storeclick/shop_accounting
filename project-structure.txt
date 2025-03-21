@@ -1,0 +1,27 @@
+shop_accounting/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── config/
+│   └── database.php
+├── includes/
+│   ├── functions.php
+│   ├── header.php
+│   └── footer.php
+├── modules/
+│   ├── products/
+│   │   ├── add.php
+│   │   ├── list.php
+│   │   └── edit.php
+│   ├── inventory/
+│   │   ├── stock.php
+│   │   └── transactions.php
+│   └── sales/
+│       ├── quick_sale.php
+│       ├── invoice.php
+│       └── invoice_list.php
+├── vendor/
+├── .htaccess
+├── composer.json
+└── index.php

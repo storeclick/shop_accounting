@@ -1,0 +1,38 @@
+@font-face {
+    font-family: IRANSans;
+    src: url('../fonts/iran-sans/IRANSansWeb.eot');
+    src: url('../fonts/iran-sans/IRANSansWeb.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/iran-sans/IRANSansWeb.woff2') format('woff2'),
+         url('../fonts/iran-sans/IRANSansWeb.woff') format('woff'),
+         url('../fonts/iran-sans/IRANSansWeb.ttf') format('truetype');
+    font-weight: normal;
+}
+
+body {
+    font-family: 'IRANSans', Tahoma, Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2e59d9;
+}

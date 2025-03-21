@@ -1,0 +1,11 @@
+Options -Indexes
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<Files config.php>
+order allow,deny
+deny from all
+</Files>

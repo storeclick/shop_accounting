@@ -1,0 +1,140 @@
+[2025-03-21 00:35:34] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT 
+        COUNT(*) as orders_count,
+        COALESCE(SUM(total_amount), 0) as total_sales
+    FROM orders 
+    WHERE DATE(created_at) = CURDATE()
+
+
+[2025-03-21 00:35:34] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT 
+        (SELECT COUNT(*) FROM products) as products_count,
+        (SELECT COUNT(*) FROM customers) as customers_count,
+        (SELECT COUNT(*) FROM orders) as orders_count,
+        COALESCE((SELECT SUM(total_amount) FROM orders), 0) as total_sales
+
+
+[2025-03-21 00:35:34] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT o.*, c.name as customer_name
+    FROM orders o
+    LEFT JOIN customers c ON c.id = o.customer_id
+    ORDER BY o.created_at DESC
+    LIMIT 5
+
+
+[2025-03-21 00:35:34] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT 
+        COUNT(*) as orders_count,
+        COALESCE(SUM(total_amount), 0) as total_sales
+    FROM orders 
+    WHERE DATE(created_at) = CURDATE()
+
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT 
+        (SELECT COUNT(*) FROM products) as products_count,
+        (SELECT COUNT(*) FROM customers) as customers_count,
+        (SELECT COUNT(*) FROM orders) as orders_count,
+        COALESCE((SELECT SUM(total_amount) FROM orders), 0) as total_sales
+
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+    SELECT o.*, c.name as customer_name
+    FROM orders o
+    LEFT JOIN customers c ON c.id = o.customer_id
+    ORDER BY o.created_at DESC
+    LIMIT 5
+
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
+[2025-03-21 00:39:58] User: مصطفی اکرادی, IP: ::1
+خطای دیتابیس: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shop_accounting.orders' doesn't exist
+Query: 
+        SELECT 
+            COUNT(*) as orders_count,
+            COALESCE(SUM(total_amount), 0) as total_amount
+        FROM orders 
+        WHERE DATE(created_at) = ?
+    
+
